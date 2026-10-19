@@ -1,0 +1,231 @@
+// Three languages: English (en), Bengali (bn), and Roman Hindi (hi).
+// Roman Hindi uses Latin letters only and never Devanagari.
+const DICT = {
+  en: {
+    appName: "Xen Temp Mail",
+    tagline: "Disposable inbox, zero hassle",
+    taglineSub: "Create a temporary address, read messages, and grab OTP codes fast.",
+    login: "Login",
+    register: "Register",
+    logout: "Logout",
+    email: "Email",
+    password: "Password",
+    newPassword: "New password",
+    confirmPassword: "Confirm password",
+    signIn: "Sign in",
+    signUp: "Create account",
+    forgot: "Forgot password?",
+    forgotText: "Enter your email and we will send a password reset link.",
+    sendReset: "Send reset link",
+    backToLogin: "Back to login",
+    savePassword: "Save password",
+    resetTitle: "Set a new password",
+    resetDone: "Password updated. Please sign in.",
+    resetSent: "If an account exists, a reset link has been sent.",
+    or: "or",
+    continueGuest: "Continue as guest",
+    verifyText: "Please verify your email to unlock mailbox features.",
+    verifyBtn: "Verify Email",
+    resendVerify: "Resend verification email",
+    checkVerified: "I have verified",
+    verifySent: "Verification email sent. Check your inbox and spam folder.",
+    verifyStillNot: "Email is not verified yet.",
+    verifiedOk: "Email verified. Thank you!",
+    verifyLinkDone: "Your email has been verified.",
+    guestNotice: "You are browsing as a guest. Sign in for more mailbox features.",
+    mailboxTitle: "Your temporary mailbox",
+    mailboxSoon: "Mailbox creation is connected in Stage 2.",
+    mailboxLocked: "Verify your email to create a mailbox.",
+    mailboxGuestLocked: "Sign in and verify your email to create a mailbox.",
+    noAddress: "No address yet",
+    copy: "Copy",
+    copied: "Copied to clipboard",
+    createEmail: "Create Email",
+    savedAccounts: "Saved email accounts",
+    emptyAccounts: "No saved accounts yet.",
+    signedInAs: "Signed in as {email}",
+    loggedOut: "You have been logged out.",
+    welcomeBack: "Welcome back!",
+    accountCreated: "Account created. Please verify your email.",
+    verifyEmailTitle: "Email verification",
+    invalidLink: "This link is invalid or has already been used.",
+    expiredLink: "This link has expired. Please request a new one.",
+    err_required: "This field is required.",
+    err_invalid_email: "Please enter a valid email address.",
+    err_short_password: "Password must be at least 6 characters.",
+    err_mismatch: "Passwords do not match.",
+    err_wrong_password: "Incorrect email or password.",
+    err_user_not_found: "Incorrect email or password.",
+    err_email_in_use: "This email is already registered.",
+    err_weak_password: "Password is too weak. Use at least 6 characters.",
+    err_too_many: "Too many attempts. Please wait a few minutes and try again.",
+    err_network: "Network error. Check your connection and try again.",
+    err_generic: "Something went wrong. Please try again.",
+    err_no_user: "Please sign in first.",
+  },
+
+  bn: {
+    appName: "Xen Temp Mail",
+    tagline: "ঝামেলাহীন অস্থায়ী ইনবক্স",
+    taglineSub: "একটি অস্থায়ী ঠিকানা তৈরি করুন, বার্তা পড়ুন এবং OTP কোড দ্রুত নিন।",
+    login: "লগইন",
+    register: "নিবন্ধন",
+    logout: "লগআউট",
+    email: "ইমেইল",
+    password: "পাসওয়ার্ড",
+    newPassword: "নতুন পাসওয়ার্ড",
+    confirmPassword: "পাসওয়ার্ড নিশ্চিত করুন",
+    signIn: "সাইন ইন",
+    signUp: "অ্যাকাউন্ট তৈরি করুন",
+    forgot: "পাসওয়ার্ড ভুলে গেছেন?",
+    forgotText: "আপনার ইমেইল লিখুন, আমরা পাসওয়ার্ড রিসেট লিংক পাঠাব।",
+    sendReset: "রিসেট লিংক পাঠান",
+    backToLogin: "লগইনে ফিরে যান",
+    savePassword: "পাসওয়ার্ড সংরক্ষণ করুন",
+    resetTitle: "নতুন পাসওয়ার্ড সেট করুন",
+    resetDone: "পাসওয়ার্ড আপডেট হয়েছে। দয়া করে সাইন ইন করুন।",
+    resetSent: "অ্যাকাউন্ট থাকলে একটি রিসেট লিংক পাঠানো হয়েছে।",
+    or: "অথবা",
+    continueGuest: "অতিথি হিসেবে চালিয়ে যান",
+    verifyText: "মেইলবক্স ফিচার চালু করতে আপনার ইমেইল যাচাই করুন।",
+    verifyBtn: "ইমেইল যাচাই করুন",
+    resendVerify: "যাচাইকরণ ইমেইল আবার পাঠান",
+    checkVerified: "আমি যাচাই করেছি",
+    verifySent: "যাচাইকরণ ইমেইল পাঠানো হয়েছে। ইনবক্স ও স্প্যাম ফোল্ডার দেখুন।",
+    verifyStillNot: "ইমেইল এখনও যাচাই হয়নি।",
+    verifiedOk: "ইমেইল যাচাই হয়েছে। ধন্যবাদ!",
+    verifyLinkDone: "আপনার ইমেইল যাচাই হয়েছে।",
+    guestNotice: "আপনি অতিথি হিসেবে ব্রাউজ করছেন। আরও ফিচারের জন্য সাইন ইন করুন।",
+    mailboxTitle: "আপনার অস্থায়ী মেইলবক্স",
+    mailboxSoon: "মেইলবক্স তৈরি Stage 2-এ যুক্ত হবে।",
+    mailboxLocked: "মেইলবক্স তৈরি করতে ইমেইল যাচাই করুন।",
+    mailboxGuestLocked: "মেইলবক্স তৈরি করতে সাইন ইন করে ইমেইল যাচাই করুন।",
+    noAddress: "এখনও কোনো ঠিকানা নেই",
+    copy: "কপি",
+    copied: "ক্লিপবোর্ডে কপি হয়েছে",
+    createEmail: "ইমেইল তৈরি করুন",
+    savedAccounts: "সংরক্ষিত ইমেইল অ্যাকাউন্ট",
+    emptyAccounts: "এখনও কোনো সংরক্ষিত অ্যাকাউন্ট নেই।",
+    signedInAs: "{email} হিসেবে সাইন ইন করা হয়েছে",
+    loggedOut: "আপনি লগআউট হয়েছেন।",
+    welcomeBack: "স্বাগতম!",
+    accountCreated: "অ্যাকাউন্ট তৈরি হয়েছে। দয়া করে ইমেইল যাচাই করুন।",
+    verifyEmailTitle: "ইমেইল যাচাইকরণ",
+    invalidLink: "এই লিংকটি অবৈধ বা ইতিমধ্যে ব্যবহৃত হয়েছে।",
+    expiredLink: "এই লিংকের মেয়াদ শেষ হয়েছে। নতুন লিংক অনুরোধ করুন।",
+    err_required: "এই ঘরটি পূরণ করা আবশ্যক।",
+    err_invalid_email: "একটি সঠিক ইমেইল ঠিকানা লিখুন।",
+    err_short_password: "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।",
+    err_mismatch: "পাসওয়ার্ড মিলছে না।",
+    err_wrong_password: "ইমেইল বা পাসওয়ার্ড ভুল।",
+    err_user_not_found: "ইমেইল বা পাসওয়ার্ড ভুল।",
+    err_email_in_use: "এই ইমেইল ইতিমধ্যে নিবন্ধিত।",
+    err_weak_password: "পাসওয়ার্ড দুর্বল। কমপক্ষে ৬ অক্ষর ব্যবহার করুন।",
+    err_too_many: "অনেকবার চেষ্টা করা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।",
+    err_network: "নেটওয়ার্ক সমস্যা। সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।",
+    err_generic: "কিছু একটা ভুল হয়েছে। আবার চেষ্টা করুন।",
+    err_no_user: "আগে সাইন ইন করুন।",
+  },
+
+  hi: {
+    appName: "Xen Temp Mail",
+    tagline: "Disposable inbox, koi jhanjhat nahi",
+    taglineSub: "Ek temporary address banayein, messages padhein aur OTP jaldi lein.",
+    login: "Login",
+    register: "Register",
+    logout: "Logout",
+    email: "Email",
+    password: "Password",
+    newPassword: "Naya password",
+    confirmPassword: "Password confirm karein",
+    signIn: "Sign in karein",
+    signUp: "Account banayein",
+    forgot: "Password bhool gaye?",
+    forgotText: "Apna email likhein, hum password reset link bhejenge.",
+    sendReset: "Reset link bhejein",
+    backToLogin: "Login par wapas jayein",
+    savePassword: "Password save karein",
+    resetTitle: "Naya password set karein",
+    resetDone: "Password update ho gaya. Kripya sign in karein.",
+    resetSent: "Agar account maujood hai, to reset link bhej diya gaya hai.",
+    or: "ya",
+    continueGuest: "Guest ke roop mein continue karein",
+    verifyText: "Mailbox features unlock karne ke liye apna email verify karein.",
+    verifyBtn: "Email verify karein",
+    resendVerify: "Verification email phir se bhejein",
+    checkVerified: "Maine verify kar liya",
+    verifySent: "Verification email bhej diya gaya hai. Inbox aur spam folder check karein.",
+    verifyStillNot: "Email abhi tak verify nahi hua hai.",
+    verifiedOk: "Email verify ho gaya. Dhanyavaad!",
+    verifyLinkDone: "Aapka email verify ho gaya hai.",
+    guestNotice: "Aap guest ke roop mein browse kar rahe hain. Zyada mailbox features ke liye sign in karein.",
+    mailboxTitle: "Aapka temporary mailbox",
+    mailboxSoon: "Mailbox creation Stage 2 mein connect hoga.",
+    mailboxLocked: "Mailbox banane ke liye email verify karein.",
+    mailboxGuestLocked: "Mailbox banane ke liye sign in karke email verify karein.",
+    noAddress: "Abhi koi address nahi hai",
+    copy: "Copy",
+    copied: "Clipboard par copy ho gaya",
+    createEmail: "Email banayein",
+    savedAccounts: "Saved email accounts",
+    emptyAccounts: "Abhi koi saved account nahi hai.",
+    signedInAs: "{email} ke roop mein sign in hai",
+    loggedOut: "Aap logout ho gaye hain.",
+    welcomeBack: "Wapas swagat hai!",
+    accountCreated: "Account ban gaya. Kripya email verify karein.",
+    verifyEmailTitle: "Email verification",
+    invalidLink: "Yeh link galat hai ya pehle hi use ho chuka hai.",
+    expiredLink: "Is link ki muddat khatam ho gayi hai. Naya link maangein.",
+    err_required: "Yeh field zaroori hai.",
+    err_invalid_email: "Kripya sahi email address likhein.",
+    err_short_password: "Password kam se kam 6 akshar ka hona chahiye.",
+    err_mismatch: "Password match nahi ho rahe hain.",
+    err_wrong_password: "Email ya password galat hai.",
+    err_user_not_found: "Email ya password galat hai.",
+    err_email_in_use: "Yeh email pehle se registered hai.",
+    err_weak_password: "Password kamzor hai. Kam se kam 6 akshar use karein.",
+    err_too_many: "Bahut zyada koshish ho gayi. Kuch minute baad phir koshish karein.",
+    err_network: "Network error. Connection check karke phir koshish karein.",
+    err_generic: "Kuch galat ho gaya. Phir koshish karein.",
+    err_no_user: "Pehle sign in karein.",
+  },
+};
+
+export const LANGS = [
+  { code: "en", label: "English" },
+  { code: "bn", label: "বাংলা" },
+  { code: "hi", label: "Hinglish" },
+];
+
+let current = "en";
+try {
+  const saved = localStorage.getItem("xen_lang");
+  if (saved && DICT[saved]) current = saved;
+} catch (_) { /* storage blocked: keep default */ }
+
+export function getLang() {
+  return current;
+}
+
+export function t(key, vars = {}) {
+  const str = DICT[current]?.[key] ?? DICT.en[key] ?? key;
+  return str.replace(/\{(\w+)\}/g, (_, k) => (vars[k] ?? ""));
+}
+
+export function applyI18n(root = document) {
+  root.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  root.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+}
+
+export function setLang(lang) {
+  if (!DICT[lang]) return;
+  current = lang;
+  try { localStorage.setItem("xen_lang", lang); } catch (_) {}
+  document.documentElement.lang = lang === "bn" ? "bn" : lang === "hi" ? "hi-Latn" : "en";
+  applyI18n();
+  document.dispatchEvent(new CustomEvent("langchange", { detail: lang }));
+}
