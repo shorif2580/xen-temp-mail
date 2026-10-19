@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1026" />
+  <title>Xen Temp Mail</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📮</text></svg>" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">📮</span>
+      <span data-i18n="appName">Xen Temp Mail</span>
+    </div>
+    <div class="topbar-right">
+      <select id="lang-select" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="bn">বাংলা</option>
+        <option value="hi">Hinglish</option>
+      </select>
+      <button id="logout-btn" class="btn btn-ghost hidden" data-i18n="logout">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ============ AUTH VIEW ============ -->
+    <section id="auth-view" class="view hidden">
+      <div class="hero">
+        <!-- Original CSS/SVG mascot (no third-party images) -->
+        <div class="mascot" aria-hidden="true">
+          <svg viewBox="0 0 160 160" width="140" height="140">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#6d5bff"/>
+                <stop offset="1" stop-color="#3ab0ff"/>
+              </linearGradient>
+            </defs>
+            <path d="M30 70 Q30 20 80 20 Q130 20 130 70 L130 90 Q130 100 120 100 L40 100 Q30 100 30 90 Z" fill="url(#g1)"/>
+            <path d="M34 62 Q80 40 126 62 L126 72 Q80 56 34 72 Z" fill="#1a1f4d" opacity=".5"/>
+            <ellipse cx="65" cy="88" rx="9" ry="11" fill="#0b1026"/>
+            <ellipse cx="95" cy="88" rx="9" ry="11" fill="#0b1026"/>
+            <circle cx="68" cy="84" r="3" fill="#fff"/>
+            <circle cx="98" cy="84" r="3" fill="#fff"/>
+            <path d="M70 108 Q80 116 90 108" stroke="#0b1026" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M40 40 L30 22 L52 32 Z" fill="#8c7bff"/>
+            <path d="M120 40 L130 22 L108 32 Z" fill="#8c7bff"/>
+            <rect x="48" y="112" width="64" height="30" rx="8" fill="#2a2f6e"/>
+            <path d="M80 112 L100 128 L80 136 L60 128 Z" fill="#3ab0ff" opacity=".9"/>
+          </svg>
+        </div>
+        <h1 data-i18n="tagline">Disposable inbox, zero hassle</h1>
+        <p class="muted" data-i18n="taglineSub">Create a temporary address, read messages, and grab OTP codes fast.</p>
+      </div>
+
+      <div class="card">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="login" data-i18n="login">Login</button>
+          <button class="tab" data-tab="register" data-i18n="register">Register</button>
+        </div>
+
+        <form id="login-form" class="form" novalidate>
+          <label><span data-i18n="email">Email</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label><span data-i18n="password">Password</span>
+            <input type="password" name="password" autocomplete="current-password" required minlength="6" />
+          </label>
+          <button type="submit" class="btn btn-primary" data-i18n="signIn">Sign in</button>
+          <button type="button" class="link-btn" id="forgot-btn" data-i18n="forgot">Forgot password?</button>
+        </form>
+
+        <form id="register-form" class="form hidden" novalidate>
+          <label><span data-i18n="email">Email</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label><span data-i18n="password">Password</span>
+            <input type="password" name="password" autocomplete="new-password" required minlength="6" />
+          </label>
+          <label><span data-i18n="confirmPassword">Confirm password</span>
+            <input type="password" name="confirm" autocomplete="new-password" required minlength="6" />
+          </label>
+          <button type="submit" class="btn btn-primary" data-i18n="signUp">Create account</button>
+        </form>
+
+        <form id="forgot-form" class="form hidden" novalidate>
+          <p class="muted" data-i18n="forgotText">Enter your email and we will send a reset link.</p>
+          <label><span data-i18n="email">Email</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <button type="submit" class="btn btn-primary" data-i18n="sendReset">Send reset link</button>
+          <button type="button" class="link-btn" id="back-login-btn" data-i18n="backToLogin">Back to login</button>
+        </form>
+
+        <div class="divider"><span data-i18n="or">or</span></div>
+        <button id="guest-btn" class="btn btn-outline" data-i18n="continueGuest">Continue as guest</button>
+      </div>
+    </section>
+
+    <!-- ============ RESET PASSWORD VIEW (from email link) ============ -->
+    <section id="reset-view" class="view hidden">
+      <div class="card">
+        <h2 data-i18n="resetTitle">Set a new password</h2>
+        <form id="reset-form" class="form" novalidate>
+          <label><span data-i18n="newPassword">New password</span>
+            <input type="password" name="password" autocomplete="new-password" required minlength="6" />
+          </label>
+          <button type="submit" class="btn btn-primary" data-i18n="savePassword">Save password</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ APP VIEW ============ -->
+    <section id="app-view" class="view hidden">
+
+      <div id="verify-banner" class="banner warn hidden">
+        <p data-i18n="verifyText">Please verify your email to unlock mailbox features.</p>
+        <div class="row">
+          <button id="send-verify-btn" class="btn btn-primary btn-sm" data-i18n="verifyBtn">Verify Email</button>
+          <button id="check-verify-btn" class="btn btn-outline btn-sm" data-i18n="checkVerified">I have verified</button>
+        </div>
+      </div>
+
+      <div id="guest-banner" class="banner info hidden">
+        <p data-i18n="guestNotice">You are browsing as a guest. Sign in for more mailbox features.</p>
+        <button class="btn btn-primary btn-sm" data-action="goto-auth" data-i18n="signIn">Sign in</button>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="mailboxTitle">Your temporary mailbox</h2>
+        <p class="muted" data-i18n="mailboxSoon">Mailbox creation is connected in Stage 2.</p>
+        <div class="address-box">
+          <span id="address-text" class="address" data-i18n="noAddress">No address yet</span>
+          <button id="copy-btn" class="btn btn-outline btn-sm" disabled data-i18n="copy">Copy</button>
+        </div>
+        <button id="create-mailbox-btn" class="btn btn-primary" disabled data-i18n="createEmail">Create Email</button>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="savedAccounts">Saved email accounts</h2>
+        <p class="muted" data-i18n="emptyAccounts">No saved accounts yet.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
