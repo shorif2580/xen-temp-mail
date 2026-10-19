@@ -194,7 +194,7 @@ const DICT = {
 export const LANGS = [
   { code: "en", label: "English" },
   { code: "bn", label: "বাংলা" },
-  { code: "hi", label: "Hinglish" },
+  { code: "hi", label: "Hindi" },
 ];
 
 let current = "en";
